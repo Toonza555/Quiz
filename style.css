@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Prompt', sans-serif;
-    background: linear-gradient(to right, #ff9a9e, #fad0c4);
+    background: linear-gradient(120deg, #ff9a9e, #fad0c4, #ffdde1);
     text-align: center;
     padding: 20px;
     animation: fadeIn 1s ease-in-out;
@@ -12,8 +12,8 @@ body {
     background: white;
     padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    max-width: 450px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
     margin: auto;
     animation: slideUp 0.8s ease-in-out;
 }
