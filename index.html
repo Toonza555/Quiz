@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personality Quiz</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #74ebd5, #ACB6E5);
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            margin: auto;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            background: #3AA17E;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #2C7C5E;
+        }
+        .hidden {
+            display: none;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>แบบทดสอบบุคลิกภาพ</h1>
+        <p>เลือกคำตอบที่ตรงกับตัวคุณมากที่สุด</p>
+        
+        <div id="quiz">
+            <div class="question"><p>1. คุณชอบทำอะไรในเวลาว่าง?</p>
+                <button onclick="answer(1, 'introvert')">อ่านหนังสือ</button>
+                <button onclick="answer(1, 'extrovert')">ออกไปเที่ยวกับเพื่อน</button>
+            </div>
+            <div class="question"><p>2. ถ้ามีงานกลุ่ม คุณจะ...</p>
+                <button onclick="answer(2, 'extrovert')">เสนอตัวเป็นผู้นำ</button>
+                <button onclick="answer(2, 'introvert')">ทำงานเงียบๆ แต่มีประสิทธิภาพ</button>
+            </div>
+            <div class="question"><p>3. สถานที่ไหนที่ทำให้คุณรู้สึกสบายใจ?</p>
+                <button onclick="answer(3, 'introvert')">อยู่บ้าน ดูหนัง ฟังเพลง</button>
+                <button onclick="answer(3, 'extrovert')">ร้านกาแฟ หรือที่ที่มีคนเยอะๆ</button>
+            </div>
+            <div class="question"><p>4. คุณชอบทำงานแบบไหน?</p>
+                <button onclick="answer(4, 'introvert')">ทำงานคนเดียว</button>
+                <button onclick="answer(4, 'extrovert')">ทำงานเป็นทีม</button>
+            </div>
+            <div class="question"><p>5. เมื่อพบกับคนแปลกหน้า คุณ...</p>
+                <button onclick="answer(5, 'introvert')">รู้สึกประหม่าและเงียบ</button>
+                <button onclick="answer(5, 'extrovert')">พูดคุยอย่างเป็นธรรมชาติ</button>
+            </div>
+            <div class="question"><p>6. งานอดิเรกที่คุณชอบ?</p>
+                <button onclick="answer(6, 'introvert')">เขียนบล็อก/งานศิลปะ</button>
+                <button onclick="answer(6, 'extrovert')">เล่นกีฬา/ร้องเพลง</button>
+            </div>
+            <div class="question"><p>7. สไตล์การเที่ยวของคุณ?</p>
+                <button onclick="answer(7, 'introvert')">ทริปเดี่ยว ชิวๆ</button>
+                <button onclick="answer(7, 'extrovert')">ทริปหมู่เฮฮา</button>
+            </div>
+            <div class="question"><p>8. เมื่อคุณมีปัญหา คุณ...</p>
+                <button onclick="answer(8, 'introvert')">คิดและแก้ไขเอง</button>
+                <button onclick="answer(8, 'extrovert')">ปรึกษาเพื่อนหรือครอบครัว</button>
+            </div>
+            <div class="question"><p>9. คุณชอบบรรยากาศแบบไหน?</p>
+                <button onclick="answer(9, 'introvert')">เงียบสงบ</button>
+                <button onclick="answer(9, 'extrovert')">คึกคัก สนุกสนาน</button>
+            </div>
+            <div class="question"><p>10. ถ้ามีปาร์ตี้ใหญ่ คุณจะ...</p>
+                <button onclick="answer(10, 'introvert')">หลบมุมเงียบๆ</button>
+                <button onclick="answer(10, 'extrovert')">เข้าสังคมสุดๆ</button>
+            </div>
+        </div>
+
+        <button id="submit" onclick="showResult()">ดูผลลัพธ์</button>
+        
+        <div id="result" class="hidden">
+            <h2>ผลลัพธ์ของคุณคือ...</h2>
+            <p id="personality"></p>
+        </div>
+    </div>
+
+    <script>
+        let scores = { introvert: 0, extrovert: 0 };
+
+        function answer(question, type) {
+            scores[type]++;
+            document.querySelectorAll(`.question:nth-child(${question}) button`).forEach(btn => {
+                btn.disabled = true;
+            });
+        }
+
+        function showResult() {
+            let resultText = scores.introvert > scores.extrovert 
+                ? "คุณเป็นคน Introvert (ชอบอยู่กับตัวเอง)" 
+                : "คุณเป็นคน Extrovert (ชอบเข้าสังคม)";
+            
+            document.getElementById("personality").innerText = resultText;
+            document.getElementById("result").classList.remove("hidden");
+        }
+    </script>
+</body>
+</html>
