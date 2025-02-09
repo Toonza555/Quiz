@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personality Quiz</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;700&display=swap');
+        
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Kanit', sans-serif;
             background: linear-gradient(to right, #74ebd5, #ACB6E5);
             text-align: center;
             padding: 20px;
+            animation: fadeIn 1s ease-in-out;
         }
         .container {
             background: white;
@@ -18,24 +21,32 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             max-width: 400px;
             margin: auto;
+            animation: slideUp 0.8s ease-in-out;
         }
         h1 {
             color: #333;
         }
+        .question img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
         button {
             display: block;
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
+            padding: 12px;
+            margin: 8px 0;
             border: none;
             background: #3AA17E;
             color: white;
             font-size: 16px;
             border-radius: 5px;
             cursor: pointer;
+            transition: transform 0.2s ease-in-out;
         }
         button:hover {
             background: #2C7C5E;
+            transform: scale(1.05);
         }
         .hidden {
             display: none;
@@ -45,6 +56,16 @@
             padding: 10px;
             background: #f8f9fa;
             border-radius: 10px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
     </style>
 </head>
@@ -54,45 +75,26 @@
         <p>เลือกคำตอบที่ตรงกับตัวคุณมากที่สุด</p>
         
         <div id="quiz">
-            <div class="question"><p>1. คุณชอบทำอะไรในเวลาว่าง?</p>
+            <div class="question">
+                <img src="https://source.unsplash.com/400x250/?book" alt="Book">
+                <p>1. คุณชอบทำอะไรในเวลาว่าง?</p>
                 <button onclick="answer(1, 'introvert')">อ่านหนังสือ</button>
                 <button onclick="answer(1, 'extrovert')">ออกไปเที่ยวกับเพื่อน</button>
+                <button onclick="answer(1, 'ambivert')">ฟังเพลง/ดูหนัง</button>
             </div>
-            <div class="question"><p>2. ถ้ามีงานกลุ่ม คุณจะ...</p>
+            <div class="question">
+                <img src="https://source.unsplash.com/400x250/?teamwork" alt="Teamwork">
+                <p>2. ถ้ามีงานกลุ่ม คุณจะ...</p>
                 <button onclick="answer(2, 'extrovert')">เสนอตัวเป็นผู้นำ</button>
                 <button onclick="answer(2, 'introvert')">ทำงานเงียบๆ แต่มีประสิทธิภาพ</button>
+                <button onclick="answer(2, 'ambivert')">ทำงานเป็นทีมและร่วมมือกัน</button>
             </div>
-            <div class="question"><p>3. สถานที่ไหนที่ทำให้คุณรู้สึกสบายใจ?</p>
+            <div class="question">
+                <img src="https://source.unsplash.com/400x250/?cafe" alt="Cafe">
+                <p>3. สถานที่ไหนที่ทำให้คุณรู้สึกสบายใจ?</p>
                 <button onclick="answer(3, 'introvert')">อยู่บ้าน ดูหนัง ฟังเพลง</button>
                 <button onclick="answer(3, 'extrovert')">ร้านกาแฟ หรือที่ที่มีคนเยอะๆ</button>
-            </div>
-            <div class="question"><p>4. คุณชอบทำงานแบบไหน?</p>
-                <button onclick="answer(4, 'introvert')">ทำงานคนเดียว</button>
-                <button onclick="answer(4, 'extrovert')">ทำงานเป็นทีม</button>
-            </div>
-            <div class="question"><p>5. เมื่อพบกับคนแปลกหน้า คุณ...</p>
-                <button onclick="answer(5, 'introvert')">รู้สึกประหม่าและเงียบ</button>
-                <button onclick="answer(5, 'extrovert')">พูดคุยอย่างเป็นธรรมชาติ</button>
-            </div>
-            <div class="question"><p>6. งานอดิเรกที่คุณชอบ?</p>
-                <button onclick="answer(6, 'introvert')">เขียนบล็อก/งานศิลปะ</button>
-                <button onclick="answer(6, 'extrovert')">เล่นกีฬา/ร้องเพลง</button>
-            </div>
-            <div class="question"><p>7. สไตล์การเที่ยวของคุณ?</p>
-                <button onclick="answer(7, 'introvert')">ทริปเดี่ยว ชิวๆ</button>
-                <button onclick="answer(7, 'extrovert')">ทริปหมู่เฮฮา</button>
-            </div>
-            <div class="question"><p>8. เมื่อคุณมีปัญหา คุณ...</p>
-                <button onclick="answer(8, 'introvert')">คิดและแก้ไขเอง</button>
-                <button onclick="answer(8, 'extrovert')">ปรึกษาเพื่อนหรือครอบครัว</button>
-            </div>
-            <div class="question"><p>9. คุณชอบบรรยากาศแบบไหน?</p>
-                <button onclick="answer(9, 'introvert')">เงียบสงบ</button>
-                <button onclick="answer(9, 'extrovert')">คึกคัก สนุกสนาน</button>
-            </div>
-            <div class="question"><p>10. ถ้ามีปาร์ตี้ใหญ่ คุณจะ...</p>
-                <button onclick="answer(10, 'introvert')">หลบมุมเงียบๆ</button>
-                <button onclick="answer(10, 'extrovert')">เข้าสังคมสุดๆ</button>
+                <button onclick="answer(3, 'ambivert')">สวนสาธารณะ บรรยากาศชิวๆ</button>
             </div>
         </div>
 
@@ -105,7 +107,7 @@
     </div>
 
     <script>
-        let scores = { introvert: 0, extrovert: 0 };
+        let scores = { introvert: 0, extrovert: 0, ambivert: 0 };
 
         function answer(question, type) {
             scores[type]++;
@@ -115,10 +117,15 @@
         }
 
         function showResult() {
-            let resultText = scores.introvert > scores.extrovert 
-                ? "คุณเป็นคน Introvert (ชอบอยู่กับตัวเอง)" 
-                : "คุณเป็นคน Extrovert (ชอบเข้าสังคม)";
-            
+            let resultText;
+            if (scores.introvert > scores.extrovert && scores.introvert > scores.ambivert) {
+                resultText = "คุณเป็นคน Introvert (ชอบอยู่กับตัวเอง)";
+            } else if (scores.extrovert > scores.introvert && scores.extrovert > scores.ambivert) {
+                resultText = "คุณเป็นคน Extrovert (ชอบเข้าสังคม)";
+            } else {
+                resultText = "คุณเป็นคน Ambivert (สมดุลระหว่างโลกส่วนตัวและสังคม)";
+            }
+
             document.getElementById("personality").innerText = resultText;
             document.getElementById("result").classList.remove("hidden");
         }
